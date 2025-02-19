@@ -1,7 +1,10 @@
 const inputItem = document.querySelector("#input-item");
 const addButton = document.querySelector("#adicionar-item");
 const listUl = document.querySelector("#lista-de-compras");
+let listVazia = document.querySelector(".msg-list");
 let contador = 0;
+
+
 
 addButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -15,8 +18,6 @@ addButton.addEventListener("click", (event) => {
 
   const containerLi = document.createElement("li");
   const containerDiv = document.createElement("div");
-//   const buttonExcluir = document.createElement("button");
-//   buttonExcluir.createTextNode = 'Excluir';
 
   containerDiv.classList.add("lista-item-container");
   containerLi.appendChild(containerDiv);
@@ -29,19 +30,19 @@ addButton.addEventListener("click", (event) => {
 
   const paragrafhList = document.createElement("p");
   const text = document.createTextNode(itemInput);
- 
+
   const paragrafhListTime = document.createElement("p");
   paragrafhListTime.classList.add("texto-data");
 
-  inputList.addEventListener('click', () => {
-    if(inputList.checked){
-        paragrafhList.style.textDecoration = "line-through";
+  inputList.addEventListener("click", () => {
+    if (inputList.checked) {
+      paragrafhList.style.textDecoration = "line-through";
     } else {
-        paragrafhList.style.textDecoration = "none";
+      paragrafhList.style.textDecoration = "none";
     }
-  })
+  });
 
-  const optionsDate =  {
+  const optionsDate = {
     day: "numeric",
     month: "numeric",
     year: "numeric",
@@ -50,11 +51,13 @@ addButton.addEventListener("click", (event) => {
   const optionsTime = {
     hour: "numeric",
     minute: "numeric",
-  }
+  };
 
-  const dayOfTheWeek = new Date().toLocaleDateString("pt-BR", {weekday: "long"});
+  const dayOfTheWeek = new Date().toLocaleDateString("pt-BR", {
+    weekday: "long",
+  });
 
-  const date = new Date().toLocaleDateString("pt-BR",optionsDate);
+  const date = new Date().toLocaleDateString("pt-BR", optionsDate);
 
   const time = new Date().toLocaleTimeString("pt-BR", optionsTime);
 
@@ -68,7 +71,22 @@ addButton.addEventListener("click", (event) => {
   containerLi.appendChild(paragrafhListTime);
   listUl.appendChild(containerLi);
 
-  
-
   inputItem.value = "";
+
+  listVz();
 });
+
+
+
+function listVz() {
+  let listV = listUl.querySelectorAll('li');
+
+  if(listV.length === 0) {
+    listVazia.style.display = 'block';
+  } else {
+    listVazia.style.display = 'none';
+  }
+}
+
+
+
